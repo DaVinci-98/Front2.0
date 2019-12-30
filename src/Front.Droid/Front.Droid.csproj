@@ -156,7 +156,9 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_mvvmcross_logo.png" />
     <AndroidResource Include="Resources\values-v19\styles.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Front.Core\Front.Core.csproj">
       <Project>{C3728909-D8F7-4F1D-8DB2-3A25B85303CA}</Project>

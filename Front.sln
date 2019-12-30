@@ -1,20 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front.Core", "src\Front.Core\Front.Core.csproj", "{C3728909-D8F7-4F1D-8DB2-3A25B85303CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Front.Core", "src\Front.Core\Front.Core.csproj", "{C3728909-D8F7-4F1D-8DB2-3A25B85303CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front.UI", "src\Front.UI\Front.UI.csproj", "{DB7A5E45-0B48-4F85-9641-A0998CF5FD19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Front.UI", "src\Front.UI\Front.UI.csproj", "{DB7A5E45-0B48-4F85-9641-A0998CF5FD19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front.Droid", "src\Front.Droid\Front.Droid.csproj", "{FE1BBA0D-88A3-47F0-8B38-3EFCE3A8942C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front.iOS", "src\Front.iOS\Front.iOS.csproj", "{FF6AC26E-587A-48E7-A04B-FE318B6DD6CC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "!Solution Items", "!Solution Items", "{2FF16F7D-6ACB-4120-AE63-1095FAAF146B}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

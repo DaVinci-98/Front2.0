@@ -1,6 +1,8 @@
+using Front.Core.Services;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 using Front.Core.ViewModels;
+using MvvmCross;
 
 namespace Front.Core
 {
@@ -10,6 +12,10 @@ namespace Front.Core
         {
             CreatableTypes()
                 .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
+            CreatableTypes()
+                .EndingWith("Dummy")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
