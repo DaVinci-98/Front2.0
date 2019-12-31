@@ -12,39 +12,42 @@ namespace Front.Core.ViewModels
 {
     public class MenuViewModel : BaseViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
+        #region Init
 
-        public IMvxAsyncCommand ShowDetailPageAsyncCommand { get; private set; }
+        private readonly IMvxNavigationService _navigationService;
 
         public MenuViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
             MenuItemList = new MvxObservableCollection<string>()
             {
-                "Home",
-                "Contacts"
+                "Game",
+                "Account",
+                "Settings"
             };
 
             ShowDetailPageAsyncCommand = new MvxAsyncCommand(ShowDetailPageAsync);
         }
 
-        private ObservableCollection<string> _menuItemList;
-        public ObservableCollection<string> MenuItemList
-        {
-            get => _menuItemList;
-            set => SetProperty(ref _menuItemList, value);
-        }
+        #endregion
+
+        #region Commands
+
+        public IMvxAsyncCommand ShowDetailPageAsyncCommand { get; private set; }
 
         private async Task ShowDetailPageAsync()
         {
             // Implement your logic here.
             switch (SelectedMenuItem)
             {
-                case "Home":
-                    await _navigationService.Navigate<HomeViewModel>();
+                case "Game":
+                    await _navigationService.Navigate<GameViewModel>();
                     break;
-                case "Contacts":
-                    await _navigationService.Navigate<ContactsViewModel>();
+                case "Account":
+                    await _navigationService.Navigate<AccountViewModel>();
+                    break;
+                case "Settings":
+                    await _navigationService.Navigate<SettingsViewModel>();
                     break;
                 default:
                     break;
@@ -61,11 +64,25 @@ namespace Front.Core.ViewModels
             }
         }
 
+        #endregion
+
+        #region Properties
+
+        private ObservableCollection<string> _menuItemList;
+        public ObservableCollection<string> MenuItemList
+        {
+            get => _menuItemList;
+            set => SetProperty(ref _menuItemList, value);
+        }
+
+
         private string _selectedMenuItem;
         public string SelectedMenuItem
         {
             get => _selectedMenuItem;
             set => SetProperty(ref _selectedMenuItem, value);
         }
+
+        #endregion
     }
 }

@@ -3,10 +3,10 @@ using Front.Core.Models;
 
 namespace Front.Core.Services
 {
-    public class PersonDataDummy : IPersonData
+    public class PersonDataDummyService : IPersonDataService
     {
         private Dictionary<string,PersonModel> _test;
-        public PersonDataDummy()
+        public PersonDataDummyService()
         {
             _test = new Dictionary<string,PersonModel>();
 

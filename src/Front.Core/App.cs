@@ -14,10 +14,6 @@ namespace Front.Core
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-            CreatableTypes()
-                .EndingWith("Dummy")
-                .AsInterfaces()
-                .RegisterAsLazySingleton();
 
             RegisterAppStart<RootViewModel>();
         }

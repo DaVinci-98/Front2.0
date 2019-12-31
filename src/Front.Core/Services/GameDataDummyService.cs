@@ -3,10 +3,10 @@ using Front.Core.Models;
 
 namespace Front.Core.Services
 {
-    public class GameDataDummy : IGameData
+    public class GameDataDummyService : IGameDataService
     {
         private GameModel _test;
-        public GameDataDummy()
+        public GameDataDummyService()
         {
             _test = new GameModel
             {
