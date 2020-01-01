@@ -4,21 +4,32 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Front.Core.Models;
+using Front.Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using Xamarin.Forms;
 
 namespace Front.Core.ViewModels
 {
-    class GameListViewModel : BaseViewModel
+    public class GameListViewModel : BaseViewModel
     {
         #region Init
 
         private readonly IMvxNavigationService _navigation;
+        private readonly IGameDataService _gameData;
 
-        public GameListViewModel(IMvxNavigationService navigation)
+        public GameListViewModel(IMvxNavigationService navigation, IGameDataService gameData)
         {
             _navigation = navigation;
+            _gameData = gameData;
+
+            ShowGamePageAsyncCommand = new MvxAsyncCommand(ShowGamePageAsync);
+
+            GamesList = new ObservableCollection<GameModel>();
+            GamesList.Add(_gameData.GetGame(new GameModel()
+            {
+                GameId = "12345"
+            }));
         }
 
         #endregion
@@ -31,6 +42,7 @@ namespace Front.Core.ViewModels
         {
             await _navigation.Navigate<GameViewModel, GameModel>(SelectedGame);
 
+            //SelectedGame = null;
 
             if (Application.Current.MainPage is MasterDetailPage masterDetailPage)
             {
@@ -47,11 +59,11 @@ namespace Front.Core.ViewModels
 
         #region Properties
 
-        private ObservableCollection<GameModel> _gameList;
-        public ObservableCollection<GameModel> GameList
+        private ObservableCollection<GameModel> _gamesList;
+        public ObservableCollection<GameModel> GamesList
         {
-            get => _gameList;
-            set => SetProperty(ref _gameList, value);
+            get => _gamesList;
+            set => SetProperty(ref _gamesList, value);
         }
 
 

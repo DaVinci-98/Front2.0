@@ -6,7 +6,7 @@ using MvvmCross.Navigation;
 
 namespace Front.Core.ViewModels
 {
-    class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         #region Init
 

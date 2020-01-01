@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Front.Core.Models;
+using MvvmCross.Commands;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 
 namespace Front.Core.ViewModels
 {
-    class SettingsViewModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel
     {
+        #region Init
+
+        private readonly IMvxNavigationService _navigationService;
+
+        public SettingsViewModel(IMvxNavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        #endregion
+
         #region Properties
 
         private ObservableCollection<string> _settingsList;

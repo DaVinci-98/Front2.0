@@ -7,7 +7,7 @@ using MvvmCross.Navigation;
 
 namespace Front.Core.ViewModels
 {
-    class HomeViewModel : BaseViewModel
+    public class HomeViewModel : BaseViewModel
     {
         #region Init
 

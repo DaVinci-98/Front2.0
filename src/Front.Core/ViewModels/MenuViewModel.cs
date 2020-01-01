@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Front.Core.Models;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -52,6 +53,8 @@ namespace Front.Core.ViewModels
                 default:
                     break;
             }
+
+            SelectedMenuItem = null;
 
             if (Application.Current.MainPage is MasterDetailPage masterDetailPage)
             {
