@@ -9,8 +9,12 @@
              x:Class="Front.UI.Pages.LoginPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button VerticalOptions="Center"
-                     Text="Register" Command="{Binding ShowRegistrationPageAsyncCommand}"/>
+            <Entry VerticalOptions="Start" Text="{Binding Email}"/>
+            <Entry VerticalOptions="StartAndExpand" Text="{Binding Password}"/>
+            <Button VerticalOptions="End" Text="Login" 
+                    Command="{Binding LoginAsyncCommand}"/>
+            <Button VerticalOptions="End" Text="Register" 
+                    Command="{Binding RegisterPersonAsyncCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

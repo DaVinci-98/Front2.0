@@ -9,9 +9,10 @@
              x:Class="Front.UI.Pages.GamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding Game.Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label VerticalOptions="StartAndExpand" 
+                   Text="{Binding Game.Name}" />
+            <Button VerticalOptions="End" HorizontalOptions="Center"
+                    Text="Close" Command="{Binding EndCurrentGameAsyncCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

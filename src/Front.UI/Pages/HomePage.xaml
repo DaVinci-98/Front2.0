@@ -9,8 +9,8 @@
              x:Class="Front.UI.Pages.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Button VerticalOptions="CenterAndExpand"
-                    Text="Login" Command="{Binding ShowLoginPageAsyncCommand}"/>
+            <Button VerticalOptions="CenterAndExpand" 
+                    Text="Login" Command="{Binding LogInAsyncCommand}"/>
             <Button VerticalOptions="CenterAndExpand"
                     Text="AboutUs" Command="{Binding ShowAboutUsPageAsyncCommand}"/>
             <Button VerticalOptions="CenterAndExpand"

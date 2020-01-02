@@ -9,7 +9,10 @@
              x:Class="Front.UI.Pages.StatsPage">
   <ContentPage.Content>
       <StackLayout>
-          <Label Text="You suck" />
+          <Label VerticalOptions="StartAndExpand"
+              Text="{Binding Person.Stats}" />
+          <Button VerticalOptions="EndAndExpand"
+              Text="Reset" Command="{Binding ResetStatsCommand}"/>
       </StackLayout>
   </ContentPage.Content>
 </views:MvxContentPage>

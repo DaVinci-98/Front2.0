@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Front.Core.Models;
+using Front.Core.Services.Interfaces;
 
-namespace Front.Core.Services
+namespace Front.Core.Services.Implementations
 {
     public class PersonDataDummyService : IPersonDataService
     {
@@ -18,31 +19,29 @@ namespace Front.Core.Services
                 Name = "Bob",
                 Nick = "bboobb",
                 Password = "strongpassword",
+                Stats = "You suck",
+                IsGuest = false,
                 AvailableGames = new List<GameModel>()
             });
 
 
         }
-        public PersonModel GetPerson(string email, string password)
+        public PersonModel GetPerson(PersonModel person)
         {
-            if (_test[email].Password == password) return _test[email];
+            if (!_test.ContainsKey(person.Email)) return null;
+            if (_test[person.Email].Password == person.Password) return _test[person.Email];
             else return null;
         }
 
-        public bool RegisterPerson(string nick, string name, string email, string password)
+        public void RegisterPerson(PersonModel person)
         {
-            if (_test.ContainsKey(email)) return false;
-            else
-            {
-                _test.Add(email, new PersonModel()
-                {
-                    Nick = nick,
-                    Email = email,
-                    Name = name,
-                    Password = password
-                });
-                return true;
-            }
+            _test.Add(person.Email, person);
         }
+
+        public bool CanRegister(PersonModel person)
+        {
+            return !_test.ContainsKey(person.Email);
+        }
+
     }
 }

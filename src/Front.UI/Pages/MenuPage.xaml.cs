@@ -19,5 +19,5 @@ namespace Front.UI.Pages
 		{
 			InitializeComponent ();
 		}
-	}
+    }
 }

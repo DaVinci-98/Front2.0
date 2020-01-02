@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Front.Core.Models;
 using Front.Core.Services;
+using Front.Core.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using Xamarin.Forms;
@@ -17,19 +18,18 @@ namespace Front.Core.ViewModels
 
         private readonly IMvxNavigationService _navigation;
         private readonly IGameDataService _gameData;
+        private readonly IUserCacheService _cache;
 
-        public GameListViewModel(IMvxNavigationService navigation, IGameDataService gameData)
+        public GameListViewModel(IMvxNavigationService navigation, IGameDataService gameData, IUserCacheService cahche)
         {
             _navigation = navigation;
             _gameData = gameData;
+            _cache = cahche;
 
-            ShowGamePageAsyncCommand = new MvxAsyncCommand(ShowGamePageAsync);
+            GamesList = new ObservableCollection<GameModel>(_cache.CachedUser.AvailableGames);
 
-            GamesList = new ObservableCollection<GameModel>();
-            GamesList.Add(_gameData.GetGame(new GameModel()
-            {
-                GameId = "12345"
-            }));
+            ShowGamePageAsyncCommand = new MvxAsyncCommand(async () => await _navigation.Navigate<GameViewModel, GameModel>(SelectedGame));
+            AddGameCommand = new MvxCommand(AddGame,() => CanAddGame);
         }
 
         #endregion
@@ -38,26 +38,47 @@ namespace Front.Core.ViewModels
 
         public IMvxAsyncCommand ShowGamePageAsyncCommand { get; private set; }
 
-        private async Task ShowGamePageAsync()
+        public IMvxCommand AddGameCommand { get; private set; }
+        private void AddGame()
         {
-            await _navigation.Navigate<GameViewModel, GameModel>(SelectedGame);
-
-            //SelectedGame = null;
-
-            if (Application.Current.MainPage is MasterDetailPage masterDetailPage)
+            var game = new GameModel()
             {
-                masterDetailPage.IsPresented = false;
-            }
-            else if (Application.Current.MainPage is NavigationPage navigationPage
-                     && navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
+                GameId = this.GameId
+            };
+            game = _gameData.GetGame(game);
+
+            if (game != null)
             {
-                nestedMasterDetail.IsPresented = false;
+                foreach (var item in GamesList)
+                {
+                    if(item.GameId == game.GameId) return;
+                }
+                GamesList.Add(game);
+                _cache.CachedUser.AvailableGames.Add(game);
             }
         }
 
         #endregion
 
         #region Properties
+
+        private bool _canAddGame;
+        public bool CanAddGame
+        {
+            get => _canAddGame;
+            set => SetCanExecuteProperty(AddGameCommand,ref _canAddGame, value);
+        }
+
+        private string _gameId;
+        public string GameId
+        {
+            get => _gameId;
+            set
+            {
+                CanAddGame = !string.IsNullOrWhiteSpace(value);
+                SetProperty(ref _gameId, value);
+            }
+        }
 
         private ObservableCollection<GameModel> _gamesList;
         public ObservableCollection<GameModel> GamesList
@@ -72,6 +93,16 @@ namespace Front.Core.ViewModels
         {
             get => _selectedGame;
             set => SetProperty(ref _selectedGame, value);
+        }
+
+        #endregion
+
+        #region PrivateMethods
+
+        private void SetCanExecuteProperty(IMvxCommand command, ref bool storage, bool value)
+        {
+            storage = value;
+            command.RaiseCanExecuteChanged();
         }
 
         #endregion

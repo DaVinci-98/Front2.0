@@ -11,10 +11,12 @@
              x:Name = "GamesListPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="GamesList" ItemsSource="{Binding GamesList}" 
+            <ListView VerticalOptions="StartAndExpand"
+                      x:Name="GamesList" ItemsSource="{Binding GamesList}" 
                       SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                 <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding BindingContext.DataContext.ShowGamePageAsyncCommand, 
+                    <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                            Command="{Binding BindingContext.DataContext.ShowGamePageAsyncCommand, 
                             Source={x:Reference GamesListPage}}">
                     </behaviors:EventToCommandBehavior>
                 </ListView.Behaviors>
@@ -29,6 +31,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Grid VerticalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Entry Text="{Binding GameId}" Grid.Column="0"/>
+                <Button Text="Add Game" Command="{Binding AddGameCommand}"
+                        Grid.Column="1"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

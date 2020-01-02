@@ -1,6 +1,6 @@
 using Front.Core.Models;
 
-namespace Front.Core.Services
+namespace Front.Core.Services.Interfaces
 {
     public interface IGameDataService
     {

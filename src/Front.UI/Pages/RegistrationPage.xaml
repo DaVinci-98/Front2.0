@@ -9,8 +9,12 @@
              x:Class="Front.UI.Pages.RegistrationPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button VerticalOptions="Center"
-                    Text="close" Command="{Binding CloseThisPageAsyncCommand}"/>
+            <Entry VerticalOptions="StartAndExpand" Text="{Binding Email}"/>
+            <Entry VerticalOptions="StartAndExpand" Text="{Binding Name}"/>
+            <Entry VerticalOptions="StartAndExpand" Text="{Binding Nick}"/>
+            <Entry VerticalOptions="StartAndExpand" Text="{Binding Password}"/>
+            <Button VerticalOptions="End" 
+                    Text="Register" Command="{Binding SaveAndLoginAsyncCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

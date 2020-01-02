@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Front.Core.Models;
+using Front.Core.Services.Interfaces;
 
-namespace Front.Core.Services
+namespace Front.Core.Services.Implementations
 {
     public class GameDataDummyService : IGameDataService
     {

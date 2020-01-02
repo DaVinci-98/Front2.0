@@ -16,7 +16,7 @@
             <Button VerticalOptions="FillAndExpand"
                     Text="Notifications" Command="{Binding ShowNotificationsPageAsyncCommand}"/>
             <Button VerticalOptions="FillAndExpand"
-                    Text="Login" Command="{Binding ShowLoginPageAsyncCommand}"/>
+                    Text="Login" Command="{Binding LogInAsyncCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

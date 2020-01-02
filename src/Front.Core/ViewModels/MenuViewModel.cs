@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Front.Core.Models;
+using Front.Core.Services;
+using Front.Core.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -16,16 +18,23 @@ namespace Front.Core.ViewModels
         #region Init
 
         private readonly IMvxNavigationService _navigationService;
+        private readonly IUserCacheService _cache;
 
-        public MenuViewModel(IMvxNavigationService navigationService)
+        public MenuViewModel(IMvxNavigationService navigationService, IUserCacheService cache)
         {
             _navigationService = navigationService;
+            _cache = cache;
+
             MenuItemList = new MvxObservableCollection<string>()
             {
-                "Game",
                 "Account",
                 "Settings"
             };
+
+            if (Application.Current.MainPage is MasterDetailPage masterDetail)
+            {
+                masterDetail.IsPresentedChanged += RefreshCurrentGame;
+            }
 
             ShowDetailPageAsyncCommand = new MvxAsyncCommand(ShowDetailPageAsync);
         }
@@ -38,7 +47,6 @@ namespace Front.Core.ViewModels
 
         private async Task ShowDetailPageAsync()
         {
-            // Implement your logic here.
             switch (SelectedMenuItem)
             {
                 case "Game":
@@ -84,6 +92,28 @@ namespace Front.Core.ViewModels
         {
             get => _selectedMenuItem;
             set => SetProperty(ref _selectedMenuItem, value);
+        }
+
+        #endregion
+
+        #region PrivateMethods
+
+        private void RefreshCurrentGame(object sender, EventArgs e)
+        {
+            if (_cache.CachedGame != null)
+            {
+                if (!MenuItemList.Contains("Game"))
+                {
+                    MenuItemList.Insert(0, "Game");
+                }
+            }
+            else
+            {
+                if (MenuItemList.Contains("Game"))
+                {
+                    MenuItemList.Remove("Game");
+                }
+            }
         }
 
         #endregion
